@@ -1,0 +1,1 @@
+En este archivo se detllaran las particpaciones en el proyecto
