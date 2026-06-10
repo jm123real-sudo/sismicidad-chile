@@ -1,3 +1,8 @@
+# 🌎 Proyecto de Ciencia de Datos Reproducible: Sismicidad en Chile
+### Magíster en Ciencia de Datos e Inteligencia Artificial · Metodología CRISP-DM
+
+---
+
 ## 📋 Descripción
 
 Proyecto de análisis de datos sísmicos históricos de Chile basado en registros del Centro Sismológico Nacional (CSN). Se aplica la metodología CRISP-DM para identificar patrones espacio-temporales y caracterizar zonas de riesgo sísmico a lo largo del territorio nacional.
@@ -10,7 +15,7 @@ Proyecto de análisis de datos sísmicos históricos de Chile basado en registro
 
 | Integrante | Rama de trabajo |
 |-----------|----------------|
-| José Miguel Serrano | `feature/eda` |
+| José Miguel Serrano | `feature/F1` |
 | Jesús Fernández Urbaneja | `feature/modelado` |
 | Osvaldo Rodrigo Moncada Peralta | `feature-documentacion` |
 | Evelyn Andrea Andrade Cárdenas | `feature/eda` |
@@ -26,33 +31,26 @@ sismicidad-chile/
 │   ├── raw/                          # Dataset original — NO modificar
 │   │   └── seismic_data.csv
 │   └── processed/                    # Datos limpios generados en F2
+│       └── seismic_data_clean.csv
 │
 ├── F1/                               # Fase 1: Definición del problema
-│   └── F1_definicion.ipynb
+│   └── F1_Definicion.ipynb
 │
 ├── F2/                               # Fase 2: Limpieza de datos
-│   └── F2_limpieza.ipynb
+│   ├── F2_limpieza.ipynb
 │
 ├── F3/                               # Fase 3: Análisis exploratorio
-│   └── F3_exploracion.ipynb
 │
 ├── F4/                               # Fase 4: Modelado
-│   └── F4_modelado.ipynb
 │
 ├── src/                              # Módulos Python reutilizables
-│   ├── data_loader.py                # Carga y rutas del dataset
-│   ├── preprocessing.py              # Funciones de limpieza (F2)
-│   └── visualization.py             # Funciones de gráficos (F3)
-│
 ├── figures/                          # Gráficos exportados por los notebooks
-├── docs/
-│   ├── metodologia.md                # Decisiones metodológicas del equipo
-│   └── referencias.md               # Bibliografía técnica APA
-│
-├── requirements.txt                  # Dependencias del entorno
+├── requirements.txt                  # Dependencias del entorno con versiones fijadas
 ├── .gitignore
 └── README.md
 ```
+
+> **Nota:** La estructura de carpetas por fase (F1/, F2/, F3/, F4/) fue adoptada como mejora respecto al mapa conceptual original que usaba una carpeta `notebooks/` única. Esta decisión técnica facilita el trabajo paralelo entre integrantes y la trazabilidad por fase.
 
 ---
 
@@ -69,12 +67,12 @@ cd sismicidad-chile
 
 ```bash
 # Windows
-python -m venv venv
-venv\Scripts\activate
+python -m venv .venv
+.venv\Scripts\activate
 
 # macOS / Linux
-python -m venv venv
-source venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate
 ```
 
 ### 3. Instalar dependencias
@@ -83,21 +81,25 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Colocar el dataset
-
-Descargar `seismic_data.csv` desde Kaggle y colocarlo en:
-```
-data/raw/seismic_data.csv
-```
-
-> El dataset no se sube al repositorio por su tamaño. Cada integrante lo descarga por separado.
-
-### 5. Ejecutar el notebook de F1
+### 4. Ejecutar los notebooks
 
 ```bash
 jupyter lab
 ```
-Abrir `F1/F1_definicion.ipynb` y ejecutar todas las celdas con **Run → Run All Cells**.
+
+Orden de ejecución recomendado:
+
+| Paso | Notebook | Descripción |
+|------|----------|-------------|
+| 1 | `F1/F1_Definicion.ipynb` | Definición del problema y exploración inicial |
+| 2 | `F2/F2_limpieza.ipynb` | Limpieza y preparación del dataset |
+
+En cada notebook: **Kernel → Restart & Run All** para ejecutar desde cero.
+
+### 5. Outputs generados automáticamente
+
+- `data/processed/seismic_data_clean.csv` — dataset limpio (generado por F2)
+- `figures/F2_distribucion_profundidad.png` — gráfico de profundidades (generado por F2)
 
 ---
 
@@ -107,7 +109,7 @@ Abrir `F1/F1_definicion.ipynb` y ejecutar todas las celdas con **Run → Run All
 main
  ├── feature/eda              → F3: análisis exploratorio y visualizaciones
  ├── feature/modelado         → F4: modelado y evaluación
- └── feature-documentacion    → docs/, README.md, referencias
+ └── feature-documentacion    → documentación técnica
 ```
 
 ```bash
@@ -128,8 +130,8 @@ git push origin feature/eda
 
 | Fase | Carpeta | CRISP-DM | Estado |
 |------|---------|----------|--------|
-| F1 | `F1/` | Comprensión del negocio + datos | ✅ En progreso |
-| F2 | `F2/` | Preparación de los datos | ⏳ Pendiente |
+| F1 | `F1/` | Comprensión del negocio + datos | ✅ Completado |
+| F2 | `F2/` | Preparación de los datos | ✅ Completado |
 | F3 | `F3/` | Análisis exploratorio | ⏳ Pendiente |
 | F4 | `F4/` | Modelado + Evaluación | ⏳ Pendiente |
 
@@ -137,12 +139,12 @@ git push origin feature/eda
 
 ## 📚 Dependencias principales
 
-Ver `requirements.txt` para la lista completa.
+Ver `requirements.txt` para la lista completa con versiones fijadas.
 
 - Python 3.10+
-- pandas 2.1+
-- numpy 1.26+
-- matplotlib 3.8+
+- pandas 3.0.3
+- numpy 2.4.6
+- matplotlib 3.10.9
 - seaborn 0.13+
 - scikit-learn 1.4+
 
@@ -156,3 +158,4 @@ Ver `requirements.txt` para la lista completa.
 - NumPy Developers. (2024). *NumPy documentation*. https://numpy.org/doc/
 - Centro Sismológico Nacional. (2024). *Base de datos sísmica de Chile*. Universidad de Chile. https://www.csn.uchile.cl/
 - Reciclador. (2021). *Chile Earthquake Dataset (1976–2021)* [Conjunto de datos]. Kaggle. https://www.kaggle.com/datasets/reciclador/chile-earthquake-dataset-1976-2021
+
