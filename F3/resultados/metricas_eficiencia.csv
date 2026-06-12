@@ -1,0 +1,3 @@
+metodo,tiempo_segundos,magnitud_minima,mejora_relativa
+bucle_iterrows,1.4079960000235587,6.0,431.87412983097533
+vectorizado_pandas,0.003260199911892414,6.0,431.87412983097533
