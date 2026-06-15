@@ -1,3 +1,4 @@
+"""
 Módulo de transformadores del dataset sísmico.
 
 Define un contrato común (clase abstracta `Transformador`) y varias
@@ -30,10 +31,6 @@ class ClasificadorMagnitudAlta(Transformador):
     """
     Agrega una columna booleana que indica si un sismo es "fuerte"
     según un umbral configurable.
-
-    Se separa el umbral como atributo del objeto (en vez de un valor
-    fijo en el código) para que el mismo transformador pueda
-    reutilizarse con distintos criterios sin modificar la clase.
     """
 
     def __init__(self, umbral: float = 6.0):
@@ -49,9 +46,6 @@ class ClasificadorProfundidad(Transformador):
     """
     Agrega una columna categórica con la clasificación de profundidad
     focal del sismo (Superficial, Intermedio, Profundo).
-
-    Los límites siguen la clasificación estándar usada en F2, lo que
-    mantiene coherencia entre fases del proyecto.
     """
 
     LIMITE_SUPERFICIAL = 70
@@ -63,7 +57,6 @@ class ClasificadorProfundidad(Transformador):
         return df
 
     def _categorizar(self, profundidad: float) -> str:
-        """Método auxiliar privado: clasifica un valor de profundidad."""
         if profundidad < self.LIMITE_SUPERFICIAL:
             return "Superficial"
         elif profundidad <= self.LIMITE_INTERMEDIO:
@@ -75,9 +68,6 @@ class NormalizadorMinMax(Transformador):
     """
     Normaliza una o más columnas numéricas al rango [0, 1] usando
     Min-Max scaling, agregando columnas con sufijo '_norm'.
-
-    Esta transformación reutiliza la misma lógica aplicada en F2,
-    ahora encapsulada como un transformador intercambiable.
     """
 
     def __init__(self, columnas: list[str]):
@@ -89,37 +79,3 @@ class NormalizadorMinMax(Transformador):
             col_min, col_max = df[col].min(), df[col].max()
             df[f"{col}_norm"] = (df[col] - col_min) / (col_max - col_min)
         return df
-=======
-class TransformadorMagnitud:
-
-    def aplicar(self, df):
-        raise NotImplementedError("Este método debe ser implementado por una subclase")
-
-
-class ClasificadorMagnitudAlta(TransformadorMagnitud):
-
-    def __init__(self, umbral=6.0):
-        self.umbral = umbral
-
-    def aplicar(self, df):
-        df = df.copy()
-        df["Sismo_Fuerte"] = df["Magnitude"] >= self.umbral
-        return df
-
-
-class ClasificadorProfundidad:
-
-    def aplicar(self, df):
-        df = df.copy()
-
-        def categorizar(profundidad):
-            if profundidad < 70:
-                return "Superficial"
-            elif profundidad <= 300:
-                return "Intermedio"
-            else:
-                return "Profundo"
-
-        df["Categoria_Profundidad"] = df["Depth"].apply(categorizar)
-        return df
-
