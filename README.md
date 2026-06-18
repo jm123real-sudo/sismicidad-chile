@@ -133,7 +133,7 @@ git push origin feature/eda
 | F1 | `F1/` | Comprensión del negocio + datos | ✅ Completado |
 | F2 | `F2/` | Preparación de los datos | ✅ Completado |
 | F3 | `F3/` | Análisis exploratorio | ⏳ Pendiente |
-| F4 | `F4/` | Modelado + Evaluación | ⏳ Pendiente |
+| F4 | `F4/` | Integración + Visualizaciones | ✅ Completado |
 
 ---
 
@@ -149,6 +149,50 @@ Ver `requirements.txt` para la lista completa con versiones fijadas.
 - scikit-learn 1.4+
 
 ---
+## 🚀 Cómo ejecutar F4
+
+1. Activar el entorno virtual:
+
+   - Windows:
+
+   ```bash
+   .venv\Scripts\activate
+   ```
+
+   - macOS/Linux:
+
+   ```bash
+   source .venv/bin/activate
+   ```
+
+2. Abrir JupyterLab:
+
+   ```bash
+   jupyter lab
+   ```
+
+3. Abrir el notebook:
+
+   ```text
+   F4/F4_Integracion.ipynb
+   ```
+
+4. Ejecutar:
+
+   ```text
+   Kernel → Restart & Run All
+   ```
+
+5. Validar que los gráficos se guardan automáticamente en:
+
+   ```text
+   figures/
+   ```
+
+El notebook integra el pipeline completo F1–F4 sin errores.
+
+---
+
 
 ## 📖 Bibliografía
 
