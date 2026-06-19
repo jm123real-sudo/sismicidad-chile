@@ -132,7 +132,7 @@ git push origin feature/eda
 |------|---------|----------|--------|
 | F1 | `F1/` | Comprensión del negocio + datos | ✅ Completado |
 | F2 | `F2/` | Preparación de los datos | ✅ Completado |
-| F3 | `F3/` | Análisis exploratorio | ⏳ Pendiente |
+| F3 | `F3/` | Análisis exploratorio | ✅ Completado |
 | F4 | `F4/` | Integración + Visualizaciones | ✅ Completado |
 
 ---
